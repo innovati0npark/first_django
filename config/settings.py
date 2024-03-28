@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'polls.apps.PollsConfig',
 ]
 
 MIDDLEWARE = [
@@ -79,6 +80,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+#python manage.py migrate 명령실행 > 자동으로 테이블 생성
+#DBeaver 들어가서 해당 db.sqlite3파일 찍어주기 >> 내용확인가능.
+
 
 
 # Password validation

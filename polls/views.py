@@ -9,3 +9,6 @@ def cafe_menu(request):
 
 def order_coffee(request):
     return HttpResponse("피스타치오 아미레카노 주세요!")
+
+def innopark(request):
+    return HttpResponse("InnovationPARK here!")
