@@ -7,7 +7,7 @@ class Question(models.Model):           #model.Model 상속받음.
     pub_date = models.DateTimeField("date published")   #날짜 필드 생성
 
     def __str__(self):
-        return self.question_text+"_Question", self.pub_date
+        return self.question_text+"_Question"
     
     def was_published_recently(self):
         return self.pub_date >= timezone.now() - datetime.timedelta(days=1)

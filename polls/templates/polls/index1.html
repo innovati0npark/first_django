@@ -1,0 +1,12 @@
+{% if choice_list %}   
+<!-- #choice_list가 있다면 여기 실행 -->
+    <ul>
+    {% for choice in choice_list %}
+        <li><a href="/polls/{{ choice.id }}/">{{ choice.choice_text }}</a></li>
+    {% endfor %}    
+    <!-- for문 끝난 거 알려줌. -->
+    </ul>
+{% else %}
+    <p>No choices are available.</p>
+{% endif %}    
+<!-- #if문이 끝났다는 것 알려줘야함 -->
