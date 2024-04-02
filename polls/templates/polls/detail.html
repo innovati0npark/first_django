@@ -1,1 +1,71 @@
-{{question}}
+<form action="{% url 'polls:vote' question.id %}" method="post">
+  {% csrf_token %}
+  <!-- csrf는 보안관련한 안전장치코드. -->
+  <fieldset>
+      <legend><h1>{{ question.question_text }}</h1></legend>
+      {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+      
+      {% for choice in question.choice_set.all %}
+          <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+          <label for="choice{{ forloop.counter }}">{{ forloop.counter }}. {{ choice.choice_text }}</label><br>
+      {% endfor %}
+  </fieldset>
+  <input type="submit" value="Vote">
+  </form>
+
+
+<!-- <h1>{{question.question_text}}</h1>
+<h2>{{question.pub_date}}</h2>
+<h2>{{question.id}}</h2>
+<h3>{{ question.choice_set.all.0.choice_text }}</h3>
+<h4>{{question.choice_set.all.0}}</h4>
+
+
+{{question.choice_set.all|lower}}
+
+<h2>{{question.pub_date | date:"Y-m-d"}}</h2>
+
+{{question.choice_set.all|title}}
+
+<h5>{{question.choice_set.all.count}}</h5>
+
+
+{% if not question.question_text %}
+    <h3>내용없음</h3>
+{% else %}
+    <h3>{{ question.question_text }}</h3>
+{% endif %}
+
+
+
+
+<h3>선택지와 투표 수(파일 크기 형태)</h3>
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }} - {{ choice.votes|filesizeformat }}</li>
+{% endfor %}
+</ul>
+
+<h3>선택지 목록 (쉼표로 구분)</h3>
+<p>{{ question.choice_set.all|join:", " }}</p>
+
+<h3>질문 텍스트 자르기</h3>
+<p>{{ question.question_text|truncatechars:50 }}</p>
+
+<h4>qwer</h4>
+{{question.choice_set.all}}
+
+
+  <h3>22모든 choice의 choice_text를 리스트 형태로 표시</h3>
+  <ul>
+    {% for choice in question.choice_set.all %}
+      <li>{{ choice.choice_text }}</li>
+    {% endfor %}
+  </ul>
+
+<h3>11모든 Question의 question_text를 리스트 형태로 표시</h3>
+  <ol>
+    {% for question in question_list %}
+      <li>{{ question.question_text }}</li>
+    {% endfor %}
+  </ol> -->

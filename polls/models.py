@@ -4,7 +4,7 @@ import datetime
 
 class Question(models.Model):           #model.Model 상속받음.
     question_text = models.CharField(max_length=200)    #문자열 필드 생성
-    pub_date = models.DateTimeField("date published")   #날짜 필드 생성
+    pub_date = models.DateTimeField(auto_now_add=True)   #날짜 필드 자동생성 "date published"(수동)
 
     def __str__(self):
         return self.question_text+"_Question"
