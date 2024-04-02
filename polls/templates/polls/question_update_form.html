@@ -1,7 +1,8 @@
 <h1>Update Question</h1>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form.as_p }}             
     <button type="submit">Update Question</button>
 </form>
 
+<!-- #form.as_table // form.as_ul 뭐 이런것도 있다. -->

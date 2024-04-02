@@ -1,13 +1,46 @@
-{% if latest_question_list %}   
-<!-- #latest_question_list가 있다면 여기 실행 -->
+{% if latest_question_list %}
+    <h2>Recent Questions</h2>
+    <ul>
+        {% for question in latest_question_list %}
+            <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No recent questions are available.</p>
+{% endif %}
+
+{% if top_questions %}
+    <h2>Top Questions</h2>
+    <ul>
+        {% for question in top_questions %}
+            <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No top questions are available.</p>
+{% endif %}
+
+{% if unvoted_questions %}
+    <h2>Unvoted Questions</h2>
+    <ul>
+        {% for question in unvoted_questions %}
+            <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No unvoted questions are available.</p>
+{% endif %}
+
+
+<!-- {% if latest_question_list %}   
+#latest_question_list가 있다면 여기 실행
     <ul>
     {% for question in latest_question_list %}
         <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
     {% endfor %}    
-    <!-- for문 끝난 거 알려줌. polls라는 url.py 안에 있는 app_name= 안에서 detail로 가라는얘기-->
+    for문 끝난 거 알려줌. polls라는 url.py 안에 있는 app_name= 안에서 detail로 가라는얘기
     </ul>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}    
-<!-- #if문이 끝났다는 것 알려줘야함 -->
-
+#if문이 끝났다는 것 알려줘야함 -->

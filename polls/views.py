@@ -202,19 +202,47 @@ from django.db.models import Sum
 
 #IndexView
 class IndexView(generic.ListView):
+    model = Question
     #[app_name]/[model_name]_list.html > 보통 이런 형식의 경로를 씀.
     template_name = "polls/index.html"
-    context_object_name = "latest_question_list"
+    context_object_name = "latest_question_list"   #index.html에서 받을 때 인식하는 이름
 
     def get_queryset(self):
-        """Return the last five published questions."""
-        # 1번 
-        return Question.objects.order_by("-pub_date")[:]
-        #2번 top_questions = Question.objects.annotate(total_votes=Sum('choice__votes')).order_by('-total_votes')[:5]
-        #3번 
+        # 연습 1번 
+        latest_question_list = Question.objects.order_by("-pub_date")[:]
+        # 연습 2번 
+        top_questions = Question.objects.annotate(total_votes=Sum('choice__votes')).order_by('-total_votes')[:5]
+        # 연습 3번 
         unvoted_questions = Question.objects.annotate(total_votes=Sum('choice__votes')).filter(total_votes=0)
-        return unvoted_questions
-        
+
+        return latest_question_list
+    
+    def get_context_data(self, **kwargs):
+        # 부모 클래스의 get_context_data를 호출하여 기본 컨텍스트를 가져옵니다.
+        context = super().get_context_data(**kwargs)
+        # 추가 컨텍스트를 정의합니다.
+        context['top_questions'] = Question.objects.annotate(total_votes=Sum('choice__votes')).order_by('-total_votes')[:5]
+        context['unvoted_questions'] = Question.objects.annotate(total_votes=Sum('choice__votes')).filter(total_votes=0)
+        return context
+    
+# def get_context(request):
+#     # 연습 1번 
+#     latest_question_list = Question.objects.order_by("-pub_date")[:]
+#     # 연습 2번 
+#     top_questions = Question.objects.annotate(total_votes=Sum('choice__votes')).order_by('-total_votes')[:5]
+#     # 연습 3번 
+#     unvoted_questions = Question.objects.annotate(total_votes=Sum('choice__votes')).filter(total_votes=0)
+#     context = {
+#         "latest_question_list": latest_question_list,
+#         "top_questions": top_questions,
+#         "unvoted_questions": unvoted_questions,     }
+    
+#     return render(request, "polls/index.html", context)
+
+
+
+
+
 
 #DetailView
 class DetailView(generic.DetailView):
