@@ -199,6 +199,7 @@ def innopark(request, question_text):
 
 from django.views import generic
 from django.db.models import Sum
+from django.utils import timezone
 
 #IndexView
 class IndexView(generic.ListView):
@@ -206,7 +207,7 @@ class IndexView(generic.ListView):
     #[app_name]/[model_name]_list.html > 보통 이런 형식의 경로를 씀.
     template_name = "polls/index.html"
     context_object_name = "latest_question_list"   #index.html에서 받을 때 인식하는 이름
-
+    
     def get_queryset(self):
         # 연습 1번 
         latest_question_list = Question.objects.order_by("-pub_date")[:]
@@ -217,6 +218,17 @@ class IndexView(generic.ListView):
 
         return latest_question_list
     
+    # def get_queryset(self):                 #테스트용 get_query
+    #     """
+    #     Return the last five published questions (not including those set to be
+    #     published in the future).
+    #     """                                         #lte는 less than equal. 
+    #     return Question.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")[:5]
+
+
+
+
+
     def get_context_data(self, **kwargs):
         # 부모 클래스의 get_context_data를 호출하여 기본 컨텍스트를 가져옵니다.
         context = super().get_context_data(**kwargs)

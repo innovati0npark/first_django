@@ -21,5 +21,6 @@ from django.urls import path, include
 #제일먼저 서버 주소타고 와서 여길 확인함.(config안 urls.py)
 urlpatterns = [
     path("polls/", include("polls.urls")),
-    path('admin/', admin.site.urls)    
+    path('admin/', admin.site.urls),
+    path("__debug__/", include("debug_toolbar.urls")),    
 ]

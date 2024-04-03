@@ -8,8 +8,8 @@ app_name = "polls"
 
 urlpatterns = [
     # ex: /polls/
-    path("", views.IndexView.as_view(), name="latest_question_list"),            #polls 뒤 아무말 없는경우
-    
+    # path("", views.IndexView.as_view(), name="latest_question_list"),            #polls 뒤 아무말 없는경우
+    path("", views.IndexView.as_view(), name="index"),
     # ex: /polls/int
     path("<int:question_id>/", views.DetailView.as_view(), name="detail"),
     #클래스 연결하고 .as_view()도 써줘야함.
